@@ -2,6 +2,7 @@ lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
+<<<<<<< HEAD
   excludeLinksFromLockfile: false
 
 importers:
@@ -5888,3 +5889,6 @@ snapshots:
       yargs-parser: 21.1.1
 
   zod@3.25.67: {}
+=======
+  excludeLinksFromLockfile: false
+>>>>>>> 86c7a63 (Initial commit)
