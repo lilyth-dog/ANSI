@@ -1,224 +1,177 @@
-# SilverCare - 고령자 감정 분석 플랫폼
+# 특허 컨설팅 플랫폼 (PatentAI)
 
-전화 기반 AI 감정 분석을 통한 고령자 정신 건강 모니터링 및 돌봄 통합 플랫폼입니다.
+KIPRIS API를 활용한 특허 정보 색인 및 신규 스타트업의 초기 시장 진입 컨설팅 서비스
 
-## 🎯 프로젝트 개요
+## 🚀 주요 기능
 
-SilverCare는 고령자의 전화 통화 내용을 AI로 분석하여 감정 상태를 파악하고, 가족(보호자)과 전문 상담사가 함께 돌봄을 제공하는 통합 플랫폼입니다.
+- **특허 검색**: KIPRIS API를 통한 한국 특허 정보 검색
+- **AI 분석**: OpenAI/OpenRouter API를 활용한 특허 분석
+- **컨설팅 서비스**: 스타트업을 위한 특허 전략 컨설팅
+- **대시보드**: 종합적인 특허 정보 및 분석 결과 시각화
 
-### 주요 기능
-
-- **4가지 사용자 역할**: 관리자, 상담자, 보호자, 대상자(고령자)
-- **AI 감정 분석**: 통화 내용 기반 실시간 감정 상태 분석
-- **실시간 모니터링**: 감정 변화 추적 및 위험 상황 조기 감지
-- **통합 대시보드**: 역할별 맞춤 대시보드 제공
-- **알림 시스템**: 위험 상황 발생 시 즉시 알림
-- **상담 기록 관리**: 전문 상담사의 개입 기록 및 추적
-
-## 🏗️ 기술 스택
-
-### Frontend & Backend
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **React 18**
-- **Tailwind CSS**
-- **shadcn/ui**
-
-### 개발 도구
-- **ESLint** - 코드 품질 관리
-- **Prettier** - 코드 포맷팅
-- **Husky** - Git hooks
-- **Vitest** - 단위 테스트
-- **pnpm** - 패키지 관리
-
-### 클라우드 & 인프라 (향후 계획)
-- **Google Cloud Platform**
-- **Firebase** (Authentication, Firestore, Storage)
-- **Google Cloud Logging**
-- **Cloud Functions**
-
-## 📁 프로젝트 구조
-
-\`\`\`
-silvercare/
-├── app/                          # Next.js App Router
-│   ├── dashboard/               # 역할별 대시보드
-│   │   ├── admin/              # 관리자 대시보드
-│   │   ├── counselor/          # 상담자 대시보드
-│   │   ├── protector/          # 보호자 대시보드
-│   │   └── senior/             # 대상자 대시보드
-│   ├── api/                    # API 라우트
-│   │   └── analyze-emotion/    # 감정 분석 API
-│   ├── globals.css             # 글로벌 스타일
-│   ├── layout.tsx              # 루트 레이아웃
-│   └── page.tsx                # 홈페이지
-├── components/                  # 재사용 가능한 컴포넌트
-│   ├── ui/                     # shadcn/ui 컴포넌트
-│   ├── auth-provider.tsx       # 인증 프로바이더
-│   ├── navigation.tsx          # 네비게이션
-│   ├── stats-card.tsx          # 통계 카드
-│   ├── emotion-chart.tsx       # 감정 차트
-│   └── recent-alerts.tsx       # 최근 알림
-├── hooks/                      # React 훅
-│   └── useCurrentUser.ts       # 사용자 인증 훅
-├── lib/                        # 유틸리티 라이브러리
-│   ├── db.ts                   # 데이터베이스 연결
-│   ├── firebase.ts             # Firebase 설정
-│   ├── iam.ts                  # IAM 권한 관리
-│   ├── logger.ts               # 로깅 시스템
-│   ├── utils.ts                # 유틸리티 함수
-│   └── mock-data.ts            # 시범용 데이터
-├── types/                      # TypeScript 타입 정의
-│   └── index.ts                # 전역 타입
-├── scripts/                    # 데이터베이스 스크립트
-│   ├── 001-create-tables.sql   # 테이블 생성
-│   └── 002-seed-data.sql       # 초기 데이터
-└── functions/                  # Cloud Functions (예정)
-\`\`\`
-
-## 🚀 시작하기
-
-### 필수 요구사항
+## 📋 요구사항
 
 - Node.js 18.0.0 이상
-- pnpm 8.0.0 이상
+- pnpm (권장) 또는 npm
+- KIPRIS API 키
+- OpenAI API 키 또는 OpenRouter API 키 (선택사항)
 
-### 설치 및 실행
+## 🛠️ 설치 및 실행
 
-1. **저장소 클론**
-   \`\`\`bash
-   git clone <repository-url>
-   cd silvercare
-   \`\`\`
+### 1. 저장소 클론
+```bash
+git clone <repository-url>
+cd patent-ai-platform
+```
 
-2. **의존성 설치**
-   \`\`\`bash
-   pnpm install
-   \`\`\`
+### 2. 의존성 설치
+```bash
+pnpm install
+# 또는
+npm install
+```
 
-3. **환경 변수 설정** (선택사항)
-   \`\`\`bash
-   cp .env.example .env.local
-   # .env.local 파일을 편집하여 필요한 환경 변수를 설정하세요
-   \`\`\`
+### 3. API 키 설정
 
-4. **개발 서버 실행**
-   \`\`\`bash
-   pnpm dev
-   \`\`\`
+#### 방법 1: 환경 변수 파일 사용 (권장)
+```bash
+# .env.local 파일 생성
+cp env.example .env.local
 
-5. **브라우저에서 확인**
-   \`\`\`
-   http://localhost:3000
-   \`\`\`
+# .env.local 파일 편집하여 API 키 입력
+KIPRIS_API_KEY=your_kipris_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+```
 
-### 데모 모드
+#### 방법 2: 웹 인터페이스 사용
+1. 애플리케이션 실행
+2. `/api-keys` 페이지 방문
+3. 각 서비스별 API 키 입력 및 저장
 
-현재 프로젝트는 **데모 모드**로 실행됩니다:
-- 실제 데이터베이스 대신 Mock 데이터 사용
-- Firebase Admin 없이 클라이언트 사이드만 구현
-- 콘솔 로깅으로 시스템 모니터링
+### 4. 개발 서버 실행
+```bash
+pnpm dev
+# 또는
+npm run dev
+```
 
-## 👥 사용자 역할
+브라우저에서 [http://localhost:3000](http://localhost:3000) 접속
 
-### 1. 관리자 (ADMIN)
-- 시스템 전체 관리
-- 사용자 계정 관리
-- IAM 권한 설정
-- 시스템 로그 모니터링
+## 🔑 API 키 발급 방법
 
-### 2. 상담자 (COUNSELOR)
-- 전문 상담 서비스 제공
-- 상담 기록 작성 및 관리
-- 개입 제안 및 추적
-- 위험도 평가
+### KIPRIS API 키
+1. [한국특허정보원](https://www.kipris.or.kr) 방문
+2. 회원가입 및 로그인
+3. API 서비스 신청
+4. 승인 후 API 키 발급
 
-### 3. 보호자 (PROTECTOR)
-- 가족 돌봄 지원
-- 통화 기록 확인
-- 감정 추세 분석
-- 알림 수신 및 대응
+### OpenAI API 키
+1. [OpenAI Platform](https://platform.openai.com) 방문
+2. 계정 생성 및 로그인
+3. API Keys 섹션에서 새 키 생성
+4. 생성된 API 키 복사
 
-### 4. 대상자 (SENIOR)
-- 고령자 본인
-- 기분 기록 작성
-- 간편 통화 기능
-- 개인 현황 확인
+### OpenRouter API 키 (OpenAI 대안)
+1. [OpenRouter](https://openrouter.ai) 방문
+2. 계정 생성 및 로그인
+3. API Keys 섹션에서 새 키 생성
+4. 생성된 API 키 복사
 
-## 🔄 역할 전환 (데모용)
+## 🏗️ 프로젝트 구조
 
-네비게이션에서 **데모용 역할 전환** 버튼을 통해 다른 사용자 역할의 대시보드를 체험할 수 있습니다.
+```
+patent-ai-platform/
+├── app/                    # Next.js 13+ App Router
+│   ├── api-keys/          # API 키 설정 페이지
+│   ├── optimization/      # 최적화 관리 페이지
+│   ├── dashboard/         # 대시보드 페이지
+│   ├── patents/           # 특허 관련 페이지
+│   └── settings/          # 일반 설정 페이지
+├── components/             # 재사용 가능한 UI 컴포넌트
+│   ├── ui/                # 기본 UI 컴포넌트
+│   └── navigation.tsx     # 네비게이션 컴포넌트
+├── lib/                    # 서비스 및 유틸리티
+│   ├── kipris.ts          # KIPRIS API 서비스
+│   ├── ai-analysis.ts     # AI 분석 서비스
+│   ├── cache-service.ts   # 캐싱 서비스
+│   ├── compression-service.ts # 압축 서비스
+│   ├── network-optimizer.ts   # 네트워크 최적화
+│   ├── optimization-manager.ts # 통합 최적화 관리
+│   └── storage.ts         # 로컬 스토리지 서비스
+├── types/                  # TypeScript 타입 정의
+└── public/                 # 정적 파일
+```
 
-## 📊 감정 분석
+## 🔧 주요 서비스
 
-### 분석 항목
-- **기본 감정**: 행복, 슬픔, 분노, 두려움, 놀라움
-- **전반적 감정**: 긍정적, 부정적, 중립적
-- **위험도**: 낮음, 보통, 높음, 긴급
-- **신뢰도**: 분석 결과의 정확도
+### KIPRIS 서비스
+- 특허 검색 및 상세 정보 조회
+- IPC 분류별, 출원인별, 발명자별 검색
+- 특허 법적 상태 및 인용 정보 조회
 
-### 키워드 추출
-- 감정 관련 핵심 키워드 자동 추출
-- 상황별 맥락 분석
-- 트렌드 분석을 위한 데이터 축적
+### AI 분석 서비스
+- 특허 신규성, 진보성, 산업상 이용가능성 분석
+- 시장 잠재력 및 위험도 평가
+- 경쟁 환경 분석 및 전략적 권장사항 제시
 
-## 🚨 알림 시스템
+### 최적화 서비스
+- **캐싱 시스템**: 데이터 다운로드 비용 최소화
+- **압축 엔진**: 네트워크 전송량 최적화
+- **배치 처리**: 네트워크 요청 효율성 향상
+- **실시간 모니터링**: 최적화 효과 추적 및 분석
 
-### 알림 유형
-- **감정적 고통**: 지속적인 우울감, 불안감
-- **응급상황**: 즉시 개입이 필요한 상황
-- **건강 우려**: 신체적 불편함 호소
-- **통화 누락**: 예정된 통화 미응답
+## 📱 사용법
 
-### 알림 등급
-- **낮음**: 일반적인 상황 알림
-- **보통**: 주의 깊은 관찰 필요
-- **높음**: 빠른 대응 필요
-- **긴급**: 즉시 개입 필요
+### 1. API 키 설정
+- `/api-keys` 페이지에서 필요한 API 키 입력
+- 각 서비스별 활성화/비활성화 설정
+- API 키 유효성 검증
 
-## 🧪 테스트
+### 2. 특허 검색
+- `/patents/search` 페이지에서 키워드 검색
+- 고급 필터링 (분류, 날짜, 상태 등)
+- 검색 결과 저장 및 즐겨찾기
 
-### 단위 테스트
-\`\`\`bash
-# 테스트 실행
-pnpm test
+### 3. AI 분석
+- 특허 선택 후 AI 분석 실행
+- 종합적인 특허 평가 결과 확인
+- 전략적 권장사항 및 위험도 분석
 
-# 테스트 감시 모드
-pnpm test --watch
+### 4. 컨설팅
+- 스타트업 정보 입력
+- 특허 포트폴리오 분석
+- 맞춤형 컨설팅 리포트 생성
 
-# 커버리지 리포트
-pnpm test:coverage
-\`\`\`
+## 🚨 주의사항
 
-## 🔄 배포
+- API 키는 민감한 정보이므로 안전하게 보관
+- 환경 변수 파일은 `.gitignore`에 포함
+- API 사용량 및 비용 모니터링 필요
+- KIPRIS API 사용 시 이용약관 준수
 
-### Vercel 배포 (권장)
-\`\`\`bash
-# Vercel CLI 설치
-npm i -g vercel
+## 🤝 기여하기
 
-# 배포
-vercel --prod
-\`\`\`
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📝 향후 계획
+## 📄 라이선스
 
-- [ ] Firebase Authentication 통합
-- [ ] 실제 데이터베이스 연결
-- [ ] Google Cloud Logging 구현
-- [ ] 실시간 알림 시스템
-- [ ] 음성 파일 업로드 기능
-- [ ] PDF 리포트 생성
-- [ ] 모바일 앱 개발
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
 
 ## 📞 지원
 
-문의사항이나 지원이 필요한 경우:
+문제가 발생하거나 질문이 있으시면:
+- GitHub Issues 생성
+- 이메일: [your-email@example.com]
 
-- **이메일**: support@silvercare.com
-- **문서**: [프로젝트 위키](링크)
-- **이슈 트래커**: [GitHub Issues](링크)
+## 🙏 감사의 말
 
----
-
-**SilverCare** - 고령자의 행복한 삶을 위한 기술 💙
+- [KIPRIS](https://www.kipris.or.kr) - 한국 특허 정보 제공
+- [OpenAI](https://openai.com) - AI 모델 API
+- [OpenRouter](https://openrouter.ai) - 다양한 AI 모델 접근
+- [Next.js](https://nextjs.org) - React 프레임워크
+- [Tailwind CSS](https://tailwindcss.com) - CSS 프레임워크
