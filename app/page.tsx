@@ -65,7 +65,7 @@ export default function Home() {
     { label: '플랫폼 출시', value: '2024', icon: Search, color: 'text-blue-600' },
     { label: '지원 기술', value: 'AI + KIPRIS', icon: TrendingUp, color: 'text-green-600' },
     { label: '서비스 대상', value: '스타트업', icon: Users, color: 'text-purple-600' },
-    { label: '보안 인증', value: 'ISO 27001', icon: Award, color: 'text-orange-600' }
+    { label: '개발 단계', value: '베타', icon: Award, color: 'text-orange-600' }
   ];
 
   const benefits = [
@@ -84,9 +84,9 @@ export default function Home() {
         <div className="container-patent py-20 lg:py-32">
           <div className="text-center max-w-4xl mx-auto animate-fade-in">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full mb-8">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
               <Sparkles className="h-4 w-4 text-blue-600" />
-              <span className="text-sm font-semibold text-blue-800">Enterprise-Grade AI Patent Platform</span>
+              <span className="text-sm font-semibold text-blue-800">AI 기반 특허 분석 플랫폼 (베타)</span>
             </div>
             
             <h1 className="text-6xl lg:text-8xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent mb-8 leading-tight">

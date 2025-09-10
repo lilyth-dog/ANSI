@@ -331,11 +331,11 @@ export default function RegisterPage() {
           </CardContent>
         </Card>
 
-        {/* Security Notice */}
+        {/* Development Notice */}
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-green-50 border border-green-200 rounded-full">
-            <Shield className="h-4 w-4 text-green-600 mr-2" />
-            <span className="text-sm text-green-800 font-medium">ISO 27001 보안 인증</span>
+          <div className="inline-flex items-center px-4 py-2 bg-orange-50 border border-orange-200 rounded-full">
+            <Shield className="h-4 w-4 text-orange-600 mr-2" />
+            <span className="text-sm text-orange-800 font-medium">베타 서비스 - 지속적인 개선 중</span>
           </div>
         </div>
       </div>
