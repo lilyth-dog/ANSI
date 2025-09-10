@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Search, TrendingUp, Users, FileText, BarChart3, Home, Settings, Key, Zap } from 'lucide-react';
+import { Search, TrendingUp, Users, FileText, BarChart3, Home, Settings, Key, Zap, Crown } from 'lucide-react';
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -61,6 +61,13 @@ export default function Navigation() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
+            <Link href="/pricing">
+              <Button variant="outline" size="sm" className="hidden sm:flex">
+                <Crown className="h-4 w-4 mr-2" />
+                프리미엄
+              </Button>
+            </Link>
+            
             <Button variant="outline" size="sm" className="hidden sm:flex">
               <FileText className="h-4 w-4 mr-2" />
               컨설팅 신청
