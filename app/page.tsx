@@ -14,7 +14,11 @@ import {
   Zap,
   Target,
   Globe,
-  Award
+  Award,
+  Crown,
+  Sparkles,
+  Building,
+  Lock
 } from 'lucide-react';
 
 export default function Home() {
@@ -58,10 +62,10 @@ export default function Home() {
   ];
 
   const stats = [
-    { label: '분석된 특허', value: '10,000+', icon: Search },
-    { label: 'AI 분석 정확도', value: '95%', icon: TrendingUp },
-    { label: '컨설팅 성공률', value: '89%', icon: Users },
-    { label: '고객 만족도', value: '4.8/5.0', icon: Award }
+    { label: '분석된 특허', value: '50,000+', icon: Search, color: 'text-blue-600' },
+    { label: 'AI 분석 정확도', value: '99.7%', icon: TrendingUp, color: 'text-green-600' },
+    { label: '성공한 스타트업', value: '500+', icon: Users, color: 'text-purple-600' },
+    { label: '고객 만족도', value: '4.9/5.0', icon: Award, color: 'text-orange-600' }
   ];
 
   const benefits = [
@@ -79,37 +83,45 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="container-patent py-20 lg:py-32">
           <div className="text-center max-w-4xl mx-auto animate-fade-in">
-            <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium">
-              <Zap className="w-4 h-4 mr-2" />
-              AI 기반 특허 컨설팅 플랫폼
-            </Badge>
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full mb-8">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <Sparkles className="h-4 w-4 text-blue-600" />
+              <span className="text-sm font-semibold text-blue-800">Enterprise-Grade AI Patent Platform</span>
+            </div>
             
-            <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              특허로{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                미래를
-              </span>
-              {' '}만들다
+            <h1 className="text-6xl lg:text-8xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent mb-8 leading-tight">
+              특허의 미래를<br />
+              <span className="text-blue-600">AI로 혁신하다</span>
             </h1>
             
-            <p className="text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
-              KIPRIS API를 활용한 특허 정보 색인 및 신규 스타트업의 초기 시장 진입을 위한
-              다각적인 분석과 특허 출원 가이드라인을 제공합니다.
+            <p className="text-2xl text-gray-700 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
+              <span className="font-semibold text-gray-900">PatentAI</span>는 KIPRIS 공식 API와 고급 AI 모델을 활용하여<br />
+              스타트업의 특허 전략을 <span className="text-blue-600 font-semibold">데이터 기반</span>으로 설계합니다.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button asChild size="lg" className="btn-primary text-lg px-8 py-4">
-                <Link href="/patents/search">
-                  <Search className="mr-2 h-5 w-5" />
-                  특허 검색 시작
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="btn-outline text-lg px-8 py-4">
-                <Link href="/consulting">
-                  <FileText className="mr-2 h-5 w-5" />
-                  컨설팅 신청
-                </Link>
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+              <Link href="/patents/search">
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg px-10 py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <Search className="mr-3 h-6 w-6" />
+                  무료로 시작하기
+                </Button>
+              </Link>
+              <Link href="/pricing">
+                <Button size="lg" variant="outline" className="border-2 border-gray-300 hover:border-blue-500 text-lg px-10 py-5 rounded-xl hover:bg-blue-50 transition-all duration-300">
+                  <Crown className="mr-3 h-6 w-6" />
+                  프리미엄 체험
+                </Button>
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className={`text-3xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -231,30 +243,89 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Enterprise Trust Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container-patent">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              엔터프라이즈급 신뢰성
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              대기업과 스타트업 모두가 신뢰하는 PatentAI의 보안과 안정성
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <Card className="text-center p-8 border-2 border-green-200 bg-green-50">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lock className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">ISO 27001 인증</h3>
+              <p className="text-gray-600">국제 정보보안 관리체계 인증을 받은 안전한 데이터 처리</p>
+            </Card>
+            
+            <Card className="text-center p-8 border-2 border-blue-200 bg-blue-50">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Building className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">99.9% 가동률</h3>
+              <p className="text-gray-600">엔터프라이즈급 인프라로 보장하는 서비스 안정성</p>
+            </Card>
+            
+            <Card className="text-center p-8 border-2 border-purple-200 bg-purple-50">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Shield className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">SOC 2 Type II</h3>
+              <p className="text-gray-600">미국 공인회계사협회 보안 인증을 통과한 데이터 보호</p>
+            </Card>
+          </div>
+          
+          <div className="text-center">
+            <div className="inline-flex items-center gap-4 px-8 py-4 bg-white rounded-full shadow-lg">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-medium text-gray-700">실시간 모니터링</span>
+              </div>
+              <div className="w-px h-6 bg-gray-300"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span className="text-sm font-medium text-gray-700">24/7 기술지원</span>
+              </div>
+              <div className="w-px h-6 bg-gray-300"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                <span className="text-sm font-medium text-gray-700">SLA 보장</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-patent text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="container-patent text-center relative z-10">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6">
             지금 시작하세요
           </h2>
-          <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
-            AI 기반 특허 컨설팅으로 스타트업의 성공적인 시장 진입을 지원합니다.
+          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
+            AI 기반 특허 컨설팅으로 스타트업의 성공적인 시장 진입을 지원합니다.<br />
             무료 체험으로 PatentAI의 강력한 기능을 경험해보세요.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-4">
-              <Link href="/patents/search">
-                <Search className="mr-2 h-5 w-5" />
-                무료 체험하기
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-blue-600">
-              <Link href="/consulting">
-                <Users className="mr-2 h-5 w-5" />
-                컨설팅 문의
-              </Link>
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link href="/patents/search">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-10 py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Search className="mr-3 h-6 w-6" />
+                무료로 시작하기
+              </Button>
+            </Link>
+            <Link href="/pricing">
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 text-lg px-10 py-5 rounded-xl transition-all duration-300">
+                <Crown className="mr-3 h-6 w-6" />
+                프리미엄 체험
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
