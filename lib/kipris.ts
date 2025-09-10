@@ -61,10 +61,18 @@ export class KiprisService {
    */
   async searchPatents(params: KiprisSearchParams): Promise<KiprisResponse> {
     try {
+      // API 키가 없으면 더미 데이터 반환 (데모 모드)
+      if (!this.apiKey) {
+        console.info('KIPRIS API 키가 설정되지 않음, 데모 모드로 실행');
+        return this.getDummySearchResults(params);
+      }
+
       this.validateApiKey();
       
-      // 실제 KIPRIS API 호출 시도
+      // 실제 KIPRIS API 호출
       try {
+        console.log('🔍 실제 KIPRIS API 호출 중...', params);
+        
         const response = await axios.get('https://www.kipris.or.kr/khome/openapi/search', {
           params: {
             query: params.query,
@@ -76,18 +84,41 @@ export class KiprisService {
             status: params.status?.join(','),
             apiKey: this.apiKey
           },
-          timeout: 10000 // 10초 타임아웃
+          timeout: 15000, // 15초 타임아웃
+          headers: {
+            'User-Agent': 'PatentAI-Platform/1.0',
+            'Accept': 'application/json'
+          }
         });
 
+        console.log('✅ KIPRIS API 응답 성공:', response.data);
         return this.parseKiprisResponse(response.data);
-      } catch (apiError) {
-        console.warn('KIPRIS API 호출 실패, 더미 데이터 사용:', apiError);
-        // API 호출 실패 시 더미 데이터 반환
+        
+      } catch (apiError: any) {
+        console.error('❌ KIPRIS API 호출 실패:', apiError.response?.status, apiError.message);
+        
+        // API 오류에 따른 구체적인 메시지
+        if (apiError.response?.status === 401) {
+          throw new Error('KIPRIS API 키가 유효하지 않습니다. 설정을 확인해주세요.');
+        } else if (apiError.response?.status === 429) {
+          throw new Error('API 호출 한도를 초과했습니다. 잠시 후 다시 시도해주세요.');
+        } else if (apiError.code === 'ECONNABORTED') {
+          throw new Error('API 응답 시간이 초과되었습니다. 네트워크를 확인해주세요.');
+        }
+        
+        // 기타 오류 시 더미 데이터 반환
+        console.warn('더미 데이터로 폴백:', apiError.message);
         return this.getDummySearchResults(params);
       }
-    } catch (error) {
-      console.error('KIPRIS API 검색 오류:', error);
-      // 더미 데이터 반환
+    } catch (error: any) {
+      console.error('KIPRIS 검색 오류:', error);
+      
+      // API 키 관련 오류는 사용자에게 알림
+      if (error.message.includes('API 키')) {
+        throw error;
+      }
+      
+      // 기타 오류는 더미 데이터로 폴백
       return this.getDummySearchResults(params);
     }
   }

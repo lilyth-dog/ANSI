@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Search, Filter, FileText, Calendar, User, Building, Heart, History, Download, Star, Sparkles } from 'lucide-react';
 import { Patent, PatentStatus, SearchHistory } from '@/types';
 import { storageService } from '@/lib/storage';
+import DataSourceIndicator from '@/components/data-source-indicator';
 
 export default function PatentSearchPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -261,6 +262,13 @@ export default function PatentSearchPage() {
                 필터 초기화
               </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* 데이터 소스 표시 */}
+        <Card className="card-patent mb-8 animate-slide-up">
+          <CardContent className="pt-6">
+            <DataSourceIndicator type="search" />
           </CardContent>
         </Card>
 

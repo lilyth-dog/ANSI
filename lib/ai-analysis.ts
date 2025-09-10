@@ -153,13 +153,34 @@ export class AiAnalysisService {
    * AI API 호출
    */
   private async callAiApi(prompt: string): Promise<string> {
-    if (this.currentProvider === 'openai') {
-      return this.callOpenAiApi(prompt);
-    } else if (this.currentProvider === 'openrouter') {
-      return this.callOpenRouterApi(prompt);
-    } else {
-      // API 키가 없을 경우 모의 분석 결과 반환
-      console.warn('AI API 키가 설정되지 않음, 모의 분석 결과 반환');
+    // API 키가 없으면 더미 데이터 반환 (데모 모드)
+    if (!this.currentProvider) {
+      console.info('AI API 키가 설정되지 않음, 데모 모드로 실행');
+      return this.getMockAnalysisResponse();
+    }
+
+    try {
+      if (this.currentProvider === 'openai') {
+        return await this.callOpenAiApi(prompt);
+      } else if (this.currentProvider === 'openrouter') {
+        return await this.callOpenRouterApi(prompt);
+      } else {
+        throw new Error('지원하지 않는 AI 제공자입니다.');
+      }
+    } catch (error: any) {
+      console.error('AI API 호출 실패:', error);
+      
+      // API 오류에 따른 구체적인 메시지
+      if (error.response?.status === 401) {
+        throw new Error('AI API 키가 유효하지 않습니다. 설정을 확인해주세요.');
+      } else if (error.response?.status === 429) {
+        throw new Error('AI API 호출 한도를 초과했습니다. 잠시 후 다시 시도해주세요.');
+      } else if (error.response?.status === 402) {
+        throw new Error('AI API 크레딧이 부족합니다. 계정을 확인해주세요.');
+      }
+      
+      // 기타 오류 시 더미 데이터로 폴백
+      console.warn('더미 데이터로 폴백:', error.message);
       return this.getMockAnalysisResponse();
     }
   }

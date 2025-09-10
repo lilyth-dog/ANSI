@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { Patent, PatentAnalysis, RiskAssessment } from '@/types';
 import { aiAnalysisService } from '@/lib/ai-analysis';
+import DataSourceIndicator from '@/components/data-source-indicator';
 import { storageService } from '@/lib/storage';
 import { toast } from 'sonner';
 
@@ -211,6 +212,13 @@ export default function AnalysisPage() {
                 )}
               </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* 데이터 소스 표시 */}
+        <Card className="card-patent mb-8 animate-slide-up">
+          <CardContent className="pt-6">
+            <DataSourceIndicator type="analysis" />
           </CardContent>
         </Card>
 
