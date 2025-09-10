@@ -62,10 +62,10 @@ export default function Home() {
   ];
 
   const stats = [
-    { label: '분석된 특허', value: '50,000+', icon: Search, color: 'text-blue-600' },
-    { label: 'AI 분석 정확도', value: '99.7%', icon: TrendingUp, color: 'text-green-600' },
-    { label: '성공한 스타트업', value: '500+', icon: Users, color: 'text-purple-600' },
-    { label: '고객 만족도', value: '4.9/5.0', icon: Award, color: 'text-orange-600' }
+    { label: '플랫폼 출시', value: '2024', icon: Search, color: 'text-blue-600' },
+    { label: '지원 기술', value: 'AI + KIPRIS', icon: TrendingUp, color: 'text-green-600' },
+    { label: '서비스 대상', value: '스타트업', icon: Users, color: 'text-purple-600' },
+    { label: '보안 인증', value: 'ISO 27001', icon: Award, color: 'text-orange-600' }
   ];
 
   const benefits = [
@@ -95,8 +95,8 @@ export default function Home() {
             </h1>
             
             <p className="text-2xl text-gray-700 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
-              <span className="font-semibold text-gray-900">PatentAI</span>는 KIPRIS 공식 API와 고급 AI 모델을 활용하여<br />
-              스타트업의 특허 전략을 <span className="text-blue-600 font-semibold">데이터 기반</span>으로 설계합니다.
+              <span className="font-semibold text-gray-900">PatentAI</span>는 KIPRIS 공식 API와 AI 기술을 활용하여<br />
+              스타트업의 특허 전략을 <span className="text-blue-600 font-semibold">체계적으로</span> 지원합니다.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
@@ -114,7 +114,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Trust Indicators */}
+            {/* Platform Features */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
@@ -260,24 +260,24 @@ export default function Home() {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Lock className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">ISO 27001 인증</h3>
-              <p className="text-gray-600">국제 정보보안 관리체계 인증을 받은 안전한 데이터 처리</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">보안 우선</h3>
+            <p className="text-gray-600">사용자 데이터 보호를 최우선으로 하는 안전한 서비스</p>
             </Card>
             
             <Card className="text-center p-8 border-2 border-blue-200 bg-blue-50">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Building className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">99.9% 가동률</h3>
-              <p className="text-gray-600">엔터프라이즈급 인프라로 보장하는 서비스 안정성</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">안정적 서비스</h3>
+            <p className="text-gray-600">신뢰할 수 있는 인프라로 제공하는 안정적인 서비스</p>
             </Card>
             
             <Card className="text-center p-8 border-2 border-purple-200 bg-purple-50">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">SOC 2 Type II</h3>
-              <p className="text-gray-600">미국 공인회계사협회 보안 인증을 통과한 데이터 보호</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">데이터 보호</h3>
+            <p className="text-gray-600">사용자 개인정보와 데이터를 안전하게 보호합니다</p>
             </Card>
           </div>
           
@@ -285,17 +285,17 @@ export default function Home() {
             <div className="inline-flex items-center gap-4 px-8 py-4 bg-white rounded-full shadow-lg">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700">실시간 모니터링</span>
+                <span className="text-sm font-medium text-gray-700">안전한 데이터 처리</span>
               </div>
               <div className="w-px h-6 bg-gray-300"></div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700">24/7 기술지원</span>
+                <span className="text-sm font-medium text-gray-700">신뢰할 수 있는 서비스</span>
               </div>
               <div className="w-px h-6 bg-gray-300"></div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700">SLA 보장</span>
+                <span className="text-sm font-medium text-gray-700">사용자 중심 설계</span>
               </div>
             </div>
           </div>

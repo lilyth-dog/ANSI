@@ -17,7 +17,6 @@ export default function Navigation() {
     { name: '특허 검색', href: '/patents/search', icon: Search },
     { name: 'AI 분석', href: '/analysis', icon: TrendingUp },
     { name: '컨설팅', href: '/consulting', icon: Users },
-    { name: '최적화 관리', href: '/optimization', icon: Zap },
     { name: 'API 키', href: '/api-keys', icon: Key },
     { name: '설정', href: '/settings', icon: Settings },
   ];

@@ -127,19 +127,19 @@ export default function DashboardPage() {
             대시보드
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            특허 분석 및 컨설팅 현황을 한눈에 확인하세요
+            나의 특허 분석 활동과 개인화된 인사이트를 확인하세요
           </p>
         </div>
 
-        {/* 데이터베이스 정보 */}
+        {/* 개인 데이터 현황 */}
         {databaseInfo && (
           <Card className="card-patent-hover mb-8 animate-slide-up">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Database className="h-5 w-5 text-primary" />
-                로컬 스토리지 현황
+                나의 데이터 현황
               </CardTitle>
-              <CardDescription>IndexedDB에 저장된 데이터 현황</CardDescription>
+              <CardDescription>개인적으로 저장된 검색 기록과 분석 결과</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
