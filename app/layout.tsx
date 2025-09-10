@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/navigation';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { AuthProvider } from '@/lib/auth-context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,12 +28,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <ErrorBoundary>
-          <Navigation />
-          <main className="min-h-screen bg-gray-50">
-            {children}
-          </main>
-        </ErrorBoundary>
+        <AuthProvider>
+          <ErrorBoundary>
+            <Navigation />
+            <main className="min-h-screen bg-gray-50">
+              {children}
+            </main>
+          </ErrorBoundary>
+        </AuthProvider>
       </body>
     </html>
   );

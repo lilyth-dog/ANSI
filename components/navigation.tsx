@@ -3,10 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Search, TrendingUp, Users, FileText, BarChart3, Home, Settings, Key, Zap, Crown } from 'lucide-react';
+import { Search, TrendingUp, Users, FileText, BarChart3, Home, Settings, Key, Zap, Crown, LogIn, User, LogOut, UserCircle } from 'lucide-react';
+import { useAuth } from '@/lib/auth-context';
+import { useState } from 'react';
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { user, isAuthenticated, logout } = useAuth();
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const navigation = [
     { name: '홈', href: '/', icon: Home },
     { name: '대시보드', href: '/dashboard', icon: BarChart3 },
@@ -59,19 +63,90 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center gap-3">
-            <Link href="/pricing">
-              <Button variant="outline" size="sm" className="hidden sm:flex">
-                <Crown className="h-4 w-4 mr-2" />
-                프리미엄
-              </Button>
-            </Link>
-            
-            <Button variant="outline" size="sm" className="hidden sm:flex">
-              <FileText className="h-4 w-4 mr-2" />
-              컨설팅 신청
-            </Button>
+                 {/* Right Side Actions */}
+                 <div className="flex items-center gap-3">
+                   {isAuthenticated ? (
+                     <>
+                       {/* User Menu */}
+                       <div className="relative">
+                         <Button
+                           variant="ghost"
+                           size="sm"
+                           className="hidden sm:flex items-center gap-2"
+                           onClick={() => setShowUserMenu(!showUserMenu)}
+                         >
+                           <UserCircle className="h-4 w-4" />
+                           <span className="hidden md:inline">{user?.firstName} {user?.lastName}</span>
+                         </Button>
+                         
+                         {showUserMenu && (
+                           <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+                             <div className="py-1">
+                               <div className="px-4 py-2 border-b border-gray-100">
+                                 <p className="text-sm font-medium text-gray-900">{user?.firstName} {user?.lastName}</p>
+                                 <p className="text-xs text-gray-500">{user?.email}</p>
+                                 <p className="text-xs text-blue-600 font-medium mt-1">
+                                   {user?.subscription.tier === 'free' ? '기본 플랜' : 
+                                    user?.subscription.tier === 'premium' ? '프리미엄 플랜' : '엔터프라이즈 플랜'}
+                                 </p>
+                               </div>
+                               <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                 대시보드
+                               </Link>
+                               <Link href="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                 설정
+                               </Link>
+                               <Link href="/pricing" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                 플랜 관리
+                               </Link>
+                               <div className="border-t border-gray-100">
+                                 <button
+                                   onClick={() => {
+                                     logout();
+                                     setShowUserMenu(false);
+                                   }}
+                                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                                 >
+                                   <LogOut className="h-4 w-4 inline mr-2" />
+                                   로그아웃
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
+                         )}
+                       </div>
+                       
+                       <Link href="/pricing">
+                         <Button variant="outline" size="sm" className="hidden sm:flex">
+                           <Crown className="h-4 w-4 mr-2" />
+                           프리미엄
+                         </Button>
+                       </Link>
+                     </>
+                   ) : (
+                     <>
+                       <Link href="/auth/login">
+                         <Button variant="ghost" size="sm" className="hidden sm:flex">
+                           <LogIn className="h-4 w-4 mr-2" />
+                           로그인
+                         </Button>
+                       </Link>
+                       
+                       <Link href="/auth/register">
+                         <Button variant="outline" size="sm" className="hidden sm:flex">
+                           <User className="h-4 w-4 mr-2" />
+                           회원가입
+                         </Button>
+                       </Link>
+                       
+                       <Link href="/pricing">
+                         <Button variant="outline" size="sm" className="hidden sm:flex">
+                           <Crown className="h-4 w-4 mr-2" />
+                           프리미엄
+                         </Button>
+                       </Link>
+                     </>
+                   )}
             
             {/* Mobile menu button */}
             <Button variant="ghost" size="sm" className="lg:hidden">
