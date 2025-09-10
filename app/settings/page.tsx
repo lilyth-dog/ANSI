@@ -30,8 +30,11 @@ import {
   Monitor,
   Languages,
   Volume2,
+  Key,
+  ArrowRight,
   VolumeX
 } from 'lucide-react';
+import Link from 'next/link';
 import { UserSettings } from '@/types';
 import { storageService } from '@/lib/storage';
 import { toast } from 'sonner';
@@ -281,6 +284,31 @@ export default function SettingsPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* API 연결 설정 */}
+          <Card className="card-patent-hover animate-slide-up">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Key className="h-5 w-5 text-primary" />
+                API 연결 설정
+              </CardTitle>
+              <CardDescription>외부 서비스와의 연결을 관리합니다</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
+                <div>
+                  <h4 className="font-medium">KIPRIS & OpenRouter API</h4>
+                  <p className="text-sm text-gray-600">특허 검색 및 AI 분석을 위한 API 설정</p>
+                </div>
+                <Link href="/settings/api">
+                  <Button>
+                    설정하기
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* 일반 설정 */}
           <Card className="card-patent-hover animate-slide-up">
             <CardHeader>

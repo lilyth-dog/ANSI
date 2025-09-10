@@ -20,6 +20,25 @@ export class AiAnalysisService {
    */
   private loadApiKeys() {
     try {
+      // 서버사이드 환경변수 우선 사용
+      if (typeof window === 'undefined') {
+        if (process.env.OPENAI_API_KEY) {
+          this.openaiApiKey = process.env.OPENAI_API_KEY;
+          if (process.env.OPENAI_API_URL) {
+            this.openaiApiUrl = process.env.OPENAI_API_URL;
+          }
+          this.currentProvider = 'openai';
+        } else if (process.env.OPENROUTER_API_KEY) {
+          this.openrouterApiKey = process.env.OPENROUTER_API_KEY;
+          if (process.env.OPENROUTER_API_URL) {
+            this.openrouterApiUrl = process.env.OPENROUTER_API_URL;
+          }
+          this.currentProvider = 'openrouter';
+        }
+        return;
+      }
+
+      // 클라이언트사이드에서는 로컬 스토리지 사용
       if (typeof window !== 'undefined') {
         const savedKeys = localStorage.getItem('patent-ai-api-keys');
         if (savedKeys) {

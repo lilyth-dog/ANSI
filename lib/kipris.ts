@@ -16,6 +16,16 @@ export class KiprisService {
    */
   private loadApiKey() {
     try {
+      // 서버사이드 환경변수 우선 사용
+      if (typeof window === 'undefined' && process.env.KIPRIS_API_KEY) {
+        this.apiKey = process.env.KIPRIS_API_KEY;
+        if (process.env.KIPRIS_API_URL) {
+          this.baseUrl = process.env.KIPRIS_API_URL;
+        }
+        return;
+      }
+
+      // 클라이언트사이드에서는 로컬 스토리지 사용 (폴백)
       if (typeof window !== 'undefined') {
         const savedKeys = localStorage.getItem('patent-ai-api-keys');
         if (savedKeys && savedKeys.trim()) {
@@ -30,7 +40,6 @@ export class KiprisService {
       }
     } catch (error) {
       console.error('API 키 로드 오류:', error);
-      // 손상된 API 키 데이터 제거
       if (typeof window !== 'undefined') {
         localStorage.removeItem('patent-ai-api-keys');
       }
