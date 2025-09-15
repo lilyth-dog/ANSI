@@ -19,9 +19,6 @@ const nextConfig = {
       // 개발 모드에서 캐시 최적화
       config.cache = {
         type: 'filesystem',
-        buildDependencies: {
-          config: [import.meta.url],
-        },
       };
     }
     return config;

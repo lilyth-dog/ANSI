@@ -159,290 +159,172 @@ export default function PatentSearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-patent">
-      <div className="container-patent py-8">
-        {/* Header */}
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium text-primary">AI 기반 특허 검색</span>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="container-patent py-12">
+        {/* Premium Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-200/50 text-blue-800 rounded-full text-sm font-semibold mb-6 shadow-sm backdrop-blur-sm">
+            <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+            <Search className="h-4 w-4 text-blue-600" />
+            특허 검색
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            특허 검색
+            특허를 검색하고
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> AI 초안</span>을 생성하세요
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            KIPRIS API를 활용한 실시간 특허 정보 검색 및 분석
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            특허를 검색하고 AI가 자동으로 특허 초안을 작성합니다
           </p>
         </div>
 
-        {/* 검색 폼 */}
-        <Card className="card-patent-hover mb-12 animate-slide-up">
-          <CardHeader className="text-center pb-6">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
-                <Search className="h-8 w-8 text-primary" />
+        {/* Premium Search Form */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <Card className="bg-white/80 backdrop-blur-xl shadow-xl border-0 rounded-3xl overflow-hidden">
+            <CardContent className="p-10">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">특허 검색하기</h2>
+                <p className="text-gray-600 text-lg">특허명, 발명자, 출원인 등으로 검색하세요</p>
               </div>
-            </div>
-            <CardTitle className="text-2xl font-bold text-gray-900">특허 검색</CardTitle>
-            <CardDescription className="text-lg">
-              키워드, 출원인, 발명자, IPC 분류 등으로 특허를 검색할 수 있습니다
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="searchQuery" className="text-sm font-medium">검색어</Label>
-                <Input
-                  id="searchQuery"
-                  placeholder="특허명, 초록, 청구항 등"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                  className="input-patent"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="status" className="text-sm font-medium">상태</Label>
-                <Select value={filters.status} onValueChange={(value) => handleFilterChange('status', value)}>
-                  <SelectTrigger className="input-patent">
-                    <SelectValue placeholder="전체" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">전체</SelectItem>
-                    <SelectItem value="pending">출원</SelectItem>
-                    <SelectItem value="published">공개</SelectItem>
-                    <SelectItem value="granted">등록</SelectItem>
-                    <SelectItem value="rejected">거절</SelectItem>
-                    <SelectItem value="expired">만료</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="dateFrom" className="text-sm font-medium">출원일 시작</Label>
-                <Input
-                  id="dateFrom"
-                  type="date"
-                  value={filters.dateFrom}
-                  onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
-                  className="input-patent"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="dateTo" className="text-sm font-medium">출원일 종료</Label>
-                <Input
-                  id="dateTo"
-                  type="date"
-                  value={filters.dateTo}
-                  onChange={(e) => handleFilterChange('dateTo', e.target.value)}
-                  className="input-patent"
-                />
-              </div>
-            </div>
-            <div className="flex gap-3 pt-4">
-              <Button onClick={handleSearch} disabled={isLoading} className="btn-primary flex-1">
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    검색 중...
-                  </>
-                ) : (
-                  <>
-                    <Search className="mr-2 h-4 w-4" />
-                    검색
-                  </>
-                )}
-              </Button>
-              <Button variant="outline" onClick={() => setFilters({
-                status: '',
-                dateFrom: '',
-                dateTo: '',
-                classification: ''
-              })} className="btn-outline">
-                <Filter className="mr-2 h-4 w-4" />
-                필터 초기화
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* 데이터 소스 표시 */}
-        <Card className="card-patent mb-8 animate-slide-up">
-          <CardContent className="pt-6">
-            <DataSourceIndicator type="search" />
-          </CardContent>
-        </Card>
-
-        {/* 검색 히스토리 */}
-        {searchHistory.length > 0 && (
-          <Card className="card-patent mb-8 animate-slide-up">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <History className="h-5 w-5 text-primary" />
-                최근 검색 기록
-              </CardTitle>
-              <CardDescription>최근에 검색한 키워드들을 확인할 수 있습니다</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {searchHistory.slice(0, 10).map((history) => (
-                  <Button
-                    key={history.id}
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setSearchQuery(history.query);
-                      handleSearch();
-                    }}
-                    className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    {history.query} ({history.resultCount}건)
-                  </Button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* 즐겨찾기 특허 */}
-        {favoritePatents.length > 0 && (
-          <Card className="card-patent mb-8 animate-slide-up">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-accent" />
-                즐겨찾기 특허
-              </CardTitle>
-              <CardDescription>저장해둔 특허들을 확인할 수 있습니다</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {favoritePatents.slice(0, 6).map((patent) => (
-                  <div key={patent.id} className="card-patent-hover p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <h4 className="font-medium text-sm text-clamp-2">{patent.title}</h4>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleFavorite(patent)}
-                        className="text-accent hover:text-accent/80 hover:bg-accent/10"
-                      >
-                        <Heart className="h-4 w-4 fill-current" />
-                      </Button>
-                    </div>
-                    <p className="text-xs text-gray-600 text-clamp-2 mb-3">{patent.abstract}</p>
-                    <div className="flex items-center gap-2">
-                      {getStatusBadge(patent.status)}
-                      <span className="text-xs text-gray-500 font-mono">{patent.id}</span>
-                    </div>
+              <div className="space-y-6">
+                <div className="relative">
+                  <Input
+                    placeholder="예: 인공지능, 스마트폰, 김철수..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                    className="text-lg h-16 pl-6 pr-16 rounded-2xl border-2 border-gray-200 focus:border-blue-500 focus:ring-0 bg-white/50 backdrop-blur-sm"
+                  />
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                    <Search className="h-6 w-6 text-gray-400" />
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* 검색 결과 */}
-        {searchResults.length > 0 && (
-          <div className="space-y-6 animate-fade-in">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">검색 결과 ({searchResults.length}건)</h2>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Filter className="h-4 w-4" />
-                  <span>정렬: 출원일순</span>
                 </div>
-                <Button variant="outline" size="sm" onClick={exportSearchResults} className="btn-outline">
-                  <Download className="h-4 w-4 mr-2" />
-                  내보내기
+
+                <Button
+                  onClick={handleSearch}
+                  disabled={isLoading || !searchQuery.trim()}
+                  className="w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-3"></div>
+                      <span className="font-semibold">검색 중...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Search className="mr-3 h-6 w-6" />
+                      <span className="font-semibold">특허 검색하기</span>
+                    </>
+                  )}
                 </Button>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Recent Searches */}
+        {searchHistory.length > 0 && (
+          <div className="max-w-2xl mx-auto mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">최근 검색</h3>
+            <div className="flex flex-wrap gap-2">
+              {searchHistory.slice(0, 8).map((history) => (
+                <button
+                  key={history.id}
+                  onClick={() => {
+                    setSearchQuery(history.query);
+                    handleSearch();
+                  }}
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full transition-colors"
+                >
+                  {history.query}
+                </button>
+              ))}
             </div>
-
-            {searchResults.map((patent, index) => (
-              <Card key={patent.id} className="search-result-card animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      {getStatusBadge(patent.status)}
-                      <span className="text-sm text-gray-500 font-mono bg-gray-100 px-2 py-1 rounded">{patent.id}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 text-clamp-2">
-                      {patent.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 text-clamp-2 leading-relaxed">
-                      {patent.abstract}
-                    </p>
-                  </div>
-                  <div className="flex gap-2 ml-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleFavorite(patent)}
-                      className={isFavorite(patent.id) ? 'text-accent hover:text-accent/80' : 'text-gray-400 hover:text-accent'}
-                    >
-                      <Heart className={`h-5 w-5 ${isFavorite(patent.id) ? 'fill-current' : ''}`} />
-                    </Button>
-                    <Button variant="outline" size="sm" className="btn-outline">
-                      <FileText className="h-4 w-4 mr-2" />
-                      상세보기
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <User className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-600">발명자:</span>
-                    <span className="font-medium">{patent.inventors.join(', ')}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Building className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-600">출원인:</span>
-                    <span className="font-medium">{patent.applicants.join(', ')}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-600">출원일:</span>
-                    <span className="font-medium">{patent.applicationDate}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-600">IPC:</span>
-                    <span className="font-medium">{patent.classification.join(', ')}</span>
-                  </div>
-                </div>
-
-                {patent.citations.length > 0 && (
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-sm font-medium text-gray-700">인용 특허:</span>
-                      <span className="text-sm text-gray-500">({patent.citations.length}건)</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {patent.citations.map((citation) => (
-                        <Badge key={citation} variant="secondary" className="text-xs">
-                          {citation}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </Card>
-            ))}
           </div>
         )}
 
-        {/* 검색 안내 */}
+        {/* Premium Search Results */}
+        {searchResults.length > 0 && (
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3">
+                검색 결과 <span className="text-blue-600">({searchResults.length}건)</span>
+              </h2>
+              <p className="text-gray-600 text-lg">원하는 특허를 선택해 AI 초안을 생성하세요</p>
+            </div>
+
+            <div className="space-y-6">
+              {searchResults.map((patent, index) => (
+                <Card key={patent.id} className="group bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl border-0 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="p-8">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-4">
+                          {getStatusBadge(patent.status)}
+                          <span className="text-sm text-gray-500 font-mono bg-gray-100 px-3 py-1 rounded-full">{patent.id}</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors leading-tight">
+                          {patent.title}
+                        </h3>
+                        <p className="text-gray-600 text-base line-clamp-3 mb-4 leading-relaxed">
+                          {patent.abstract}
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-500">
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                            <span>발명자: {patent.inventors.join(', ')}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                            <span>출원인: {patent.applicants.join(', ')}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
+                            <span>출원일: {patent.applicationDate}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 ml-6">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleFavorite(patent)}
+                          className={`rounded-xl px-3 py-2 transition-all duration-200 ${
+                            isFavorite(patent.id)
+                              ? 'text-red-500 bg-red-50 hover:bg-red-100'
+                              : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
+                          }`}
+                        >
+                          <Heart className={`h-5 w-5 ${isFavorite(patent.id) ? 'fill-current' : ''}`} />
+                        </Button>
+                        <Button
+                          onClick={() => window.open(`/patents/draft?patentId=${patent.id}`, '_blank')}
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold"
+                        >
+                          <Sparkles className="h-5 w-5 mr-2" />
+                          AI 초안 생성
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Premium Empty State */}
         {searchResults.length === 0 && !isLoading && (
-          <Card className="text-center py-16 animate-fade-in">
-            <CardContent>
-              <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Search className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">특허를 검색해보세요</h3>
-              <p className="text-gray-500 max-w-md mx-auto">
-                위의 검색 폼을 사용하여 특허를 검색하거나, 필터를 적용하여 원하는 결과를 찾아보세요.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="text-center py-20">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg">
+              <Search className="h-10 w-10 text-blue-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">특허를 검색해보세요</h3>
+            <p className="text-gray-600 text-lg max-w-md mx-auto leading-relaxed">
+              위의 검색창에 키워드를 입력하고 검색 버튼을 클릭하세요.
+              AI가 자동으로 특허 초안을 작성해드립니다.
+            </p>
+          </div>
         )}
       </div>
     </div>

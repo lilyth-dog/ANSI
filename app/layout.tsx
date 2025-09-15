@@ -31,9 +31,9 @@ export default function RootLayout({
         <AuthProvider>
           <ErrorBoundary>
             <Navigation />
-            <main className="min-h-screen bg-gray-50">
-              {children}
-            </main>
+    <main className="min-h-screen bg-gray-50">
+      {children}
+    </main>
           </ErrorBoundary>
         </AuthProvider>
       </body>
